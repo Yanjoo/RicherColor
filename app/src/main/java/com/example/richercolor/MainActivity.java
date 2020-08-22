@@ -34,16 +34,27 @@ public class MainActivity extends AppCompatActivity {
         getPhotoBtn = findViewById(R.id.get_photo_btn);
         viewArtBtn = findViewById(R.id.view_art);
 
-
-        getPhotoBtn.setOnClickListener(new View.OnClickListener() {
+        takePhotoBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 takePhoto();
             }
         });
+
+        getPhotoBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getPhoto();
+            }
+        });
     }
 
     private void takePhoto() {
+        Intent intent = new Intent(this, Photo.class);
+        startActivity(intent);
+    }
+
+    private void getPhoto() {
         Intent intent = new Intent(this, Album.class);
         startActivity(intent);
     }
