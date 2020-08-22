@@ -15,17 +15,14 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 
 import java.io.File;
 
 public class Photo extends AppCompatActivity {
-    String[] permission_list ={
-            Manifest.permission.CAMERA,
-            Manifest.permission.READ_EXTERNAL_STORAGE,
-            Manifest.permission.WRITE_EXTERNAL_STORAGE
-    };
+
     //경로를 가지고 있는 변수
     String dir_path;
     //저장된 이미지에 접근할 수 있는 uri
@@ -36,26 +33,9 @@ public class Photo extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_photo);
 
-        image1 = (ImageView)findViewById(R.id.imageView);
-
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
-            requestPermissions(permission_list, 0);
-        } else{
-            init();
-        }
-
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        for(int a1: grantResults){
-            if(a1== PackageManager.PERMISSION_DENIED){
-                return;
-            }
-        }
+        image1 = findViewById(R.id.photo_imageView);
         init();
     }
 
@@ -63,10 +43,11 @@ public class Photo extends AppCompatActivity {
         String temp_path= Environment.getExternalStorageDirectory().getAbsolutePath();
         dir_path=temp_path + "/Android/data" + getPackageName();
 
+        startCamera();
 
     }
 
-    public void startCamera(View view){
+    public void startCamera(){
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         //이름 겹치지 않게 아무거나
         String file_name = "/temp_" + System.currentTimeMillis()+".jpg";
@@ -89,6 +70,7 @@ public class Photo extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if(resultCode==RESULT_OK){
+            Log.d("Photo ","이미지 로딩");
             Bitmap bitmap = BitmapFactory.decodeFile(contentUri.getPath());
             image1.setImageBitmap(bitmap);
             galleryAddPic();

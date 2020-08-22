@@ -12,7 +12,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Photo"></activity>
+        <activity android:name=".Photo"/>
         <activity android:name=".Album" />
         <activity android:name=".MainActivity">
             <intent-filter>

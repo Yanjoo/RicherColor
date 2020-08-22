@@ -14,7 +14,9 @@ import android.widget.Button;
 public class MainActivity extends AppCompatActivity {
 
     String[] permission_list = {
-            Manifest.permission.READ_EXTERNAL_STORAGE
+            Manifest.permission.READ_EXTERNAL_STORAGE,
+            Manifest.permission.CAMERA,
+            Manifest.permission.WRITE_EXTERNAL_STORAGE
     };
 
     Button takePhotoBtn;
