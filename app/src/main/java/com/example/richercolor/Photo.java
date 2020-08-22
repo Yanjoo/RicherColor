@@ -10,6 +10,8 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
+import android.media.ExifInterface;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -44,7 +46,6 @@ public class Photo extends AppCompatActivity {
         dir_path=temp_path + "/Android/data" + getPackageName();
 
         startCamera();
-
     }
 
     public void startCamera(){
@@ -69,12 +70,20 @@ public class Photo extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        Log.d("Photo ", resultCode+"");
+
         if(resultCode==RESULT_OK){
             Log.d("Photo ","이미지 로딩");
             Bitmap bitmap = BitmapFactory.decodeFile(contentUri.getPath());
-            image1.setImageBitmap(bitmap);
-            galleryAddPic();
+            //image1.setImageBitmap(bitmap);
 
+            // 이미지 크기 조정
+            Bitmap bitmap2 = resizeBitmap(1024, bitmap);
+
+
+            image1.setImageBitmap(bitmap2);
+
+            galleryAddPic();
         }
     }
 
@@ -84,5 +93,54 @@ public class Photo extends AppCompatActivity {
         Uri contentUri = Uri.fromFile(f);
         mediaScanIntent.setData(contentUri);
         this.sendBroadcast(mediaScanIntent);
+    }
+
+    public Bitmap resizeBitmap(int targetWidth, Bitmap source) {
+        double ratio = (double) targetWidth / (double) source.getWidth();
+        int targetHeight = (int) (source.getHeight() * ratio);
+        Bitmap result = Bitmap.createScaledBitmap(source, targetWidth, targetHeight, false);
+        if (result != source)
+            source.recycle();
+        return result;
+    }
+
+    public float getDegree(String source) {
+        try {
+            ExifInterface exif = new ExifInterface(source);
+            int degree = 0;
+            int ori = exif.getAttributeInt(ExifInterface.TAG_ORIENTATION, -1);
+            switch (ori) {
+                case ExifInterface.ORIENTATION_ROTATE_90:
+                    degree = 90;
+                    break;
+                case ExifInterface.ORIENTATION_ROTATE_180:
+                    degree = 180;
+                    break;
+                case ExifInterface.ORIENTATION_ROTATE_270:
+                    degree = 270;
+                    break;
+            }
+            return degree;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return 0.0f;
+    }
+
+    public Bitmap rotateBitmap(Bitmap bitmap, float degree) {
+        try {
+            int width = bitmap.getWidth();
+            int height = bitmap.getHeight();
+            Matrix matrix = new Matrix();
+            matrix.postRotate(degree);
+
+            Bitmap bitmap2 = Bitmap.createBitmap(bitmap, 0, 0, width, height, matrix, true);
+            bitmap.recycle();
+
+            return bitmap2;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }
