@@ -8,16 +8,29 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.graphics.Matrix;
 import android.media.ExifInterface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Log;
+import android.view.MotionEvent;
+import android.view.View;
 import android.widget.ImageView;
+import android.widget.Toast;
+
+import com.skydoves.balloon.ArrowConstraints;
+import com.skydoves.balloon.ArrowOrientation;
+import com.skydoves.balloon.Balloon;
+import com.skydoves.balloon.BalloonAnimation;
+import com.skydoves.balloon.OnBalloonClickListener;
 
 public class Album extends AppCompatActivity {
 
-    ImageView imageView;
+    ImageView imageView;    // 이미지뷰
+    Bitmap albumImage;      // 앨범에서 불러온 사진을 비트맵 담을 객체
+    float touchX, touchY;   // 사진에서 터치하는 좌표
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,8 +38,41 @@ public class Album extends AppCompatActivity {
         setContentView(R.layout.activity_album);
 
         imageView = findViewById(R.id.imageView);
-
         getImage();
+
+        // 이미지뷰 터치했을때
+        imageView.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                    touchX = event.getX();  // 좌표를 받아온다
+                    touchY = event.getY();
+
+                    // 좌표에 RGB 값을 추출한다.
+                    int rgb = albumImage.getPixel((int)touchX, (int)touchY);
+                    int R = Color.red(rgb);
+                    int G = Color.green(rgb);
+                    int B = Color.blue(rgb);
+                    Log.d("Album ", "X " + touchX + " Y " + touchY + " rgb " + rgb);
+                    Log.d("Album ", "R " + R + " G " + G + " B " + B);
+
+                    // 좌표에 툴팁을 띄운다.
+                    String color = "(" + R + "," + G + "," + B +")";
+                    Balloon ballon = new Balloon.Builder(Album.this)
+                            .setArrowVisible(false)
+                            .setWidthRatio(0.25f)
+                            .setHeight(65)
+                            .setText("rgb\n"+color)
+                            .setAlpha(0.8f)
+                            .setBackgroundColor(Color.rgb(100, 228, 44))
+                            .setBalloonAnimation(BalloonAnimation.FADE)
+                            .build();
+                    ballon.show(v, (int)touchX, (int)touchY);
+                }
+
+                return false;
+            }
+        });
     }
 
     private void getImage() {
@@ -62,7 +108,8 @@ public class Album extends AppCompatActivity {
                 float degree = getDegree(source);
                 Bitmap bitmap3 = rotateBitmap(bitmap2, degree);
 
-                imageView.setImageBitmap(bitmap3);
+                albumImage = bitmap3;
+                imageView.setImageBitmap(albumImage);
 
             }
         } catch (Exception e) {
