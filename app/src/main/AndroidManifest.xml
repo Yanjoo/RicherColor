@@ -3,8 +3,9 @@
     package="com.example.richercolor">
 
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -12,7 +13,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Photo"/>
+        <activity android:name=".Colortest5"></activity>
+        <activity android:name=".Colortest4" />
+        <activity android:name=".Colortest3" />
+        <activity android:name=".Colortest2" />
+        <activity android:name=".Colortest1" />
+        <activity android:name=".Photo" />
         <activity android:name=".Album" />
         <activity android:name=".MainActivity">
             <intent-filter>
@@ -21,14 +27,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <provider
-            android:authorities="kr.co.richercolor.file_provider"
             android:name="androidx.core.content.FileProvider"
+            android:authorities="kr.co.richercolor.file_provider"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/file_path"/>
+                android:resource="@xml/file_path" />
         </provider>
     </application>
 
