@@ -22,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
     Button takePhotoBtn;
     Button getPhotoBtn;
     Button viewArtBtn;
+    Button colortestBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
         takePhotoBtn = findViewById(R.id.take_photo_btn);
         getPhotoBtn = findViewById(R.id.get_photo_btn);
         viewArtBtn = findViewById(R.id.view_art);
+        colortestBtn = findViewById(R.id.color_test);
 
         takePhotoBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -49,6 +51,13 @@ public class MainActivity extends AppCompatActivity {
                 getPhoto();
             }
         });
+
+        colortestBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                colortest();
+            }
+        });
     }
 
     private void takePhoto() {
@@ -58,6 +67,11 @@ public class MainActivity extends AppCompatActivity {
 
     private void getPhoto() {
         Intent intent = new Intent(this, Album.class);
+        startActivity(intent);
+    }
+
+    private void colortest(){
+        Intent intent = new Intent(this,Colortest1.class);
         startActivity(intent);
     }
 }

@@ -27,21 +27,21 @@
         android:orientation="horizontal">
 
         <CheckBox
-            android:id="@+id/checkBox7"
+            android:id="@+id/check7"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="2" />
 
         <CheckBox
-            android:id="@+id/checkBox8"
+            android:id="@+id/check8"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="5" />
 
         <CheckBox
-            android:id="@+id/checkBox9"
+            android:id="@+id/check9"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -52,7 +52,7 @@
         android:id="@+id/imageView5"
         android:layout_width="match_parent"
         android:layout_height="270dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="20dp"
         app:srcCompat="@drawable/green4" />
 
     <LinearLayout
@@ -61,21 +61,21 @@
         android:orientation="horizontal">
 
         <CheckBox
-            android:id="@+id/checkBox11"
+            android:id="@+id/check10"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="15" />
 
         <CheckBox
-            android:id="@+id/checkBox10"
+            android:id="@+id/check11"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="17" />
 
         <CheckBox
-            android:id="@+id/checkBox12"
+            android:id="@+id/check12"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
