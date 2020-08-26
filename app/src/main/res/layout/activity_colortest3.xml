@@ -21,32 +21,36 @@
         android:layout_height="270dp"
         app:srcCompat="@drawable/test2" />
 
-    <LinearLayout
+    <RadioGroup
+        android:id="@+id/test5"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal" >
 
-        <CheckBox
-            android:id="@+id/check13"
+        <RadioButton
+            android:id="@+id/radio13"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="33" />
+            android:text="33"
+            android:textSize="18sp" />
 
-        <CheckBox
-            android:id="@+id/check14"
+        <RadioButton
+            android:id="@+id/radio14"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="97" />
+            android:text="97"
+            android:textSize="18sp" />
 
-        <CheckBox
-            android:id="@+id/check15"
+        <RadioButton
+            android:id="@+id/radio15"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="잘 모르겠다" />
-    </LinearLayout>
+            android:text="잘 모르겠다"
+            android:textSize="18sp" />
+    </RadioGroup>
 
     <ImageView
         android:id="@+id/imageView7"
@@ -55,32 +59,36 @@
         android:layout_marginTop="20dp"
         app:srcCompat="@drawable/red1" />
 
-    <LinearLayout
+    <RadioGroup
+        android:id="@+id/test6"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal" >
 
-        <CheckBox
-            android:id="@+id/check16"
+        <RadioButton
+            android:id="@+id/radio16"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="6" />
+            android:text="6"
+            android:textSize="18sp" />
 
-        <CheckBox
-            android:id="@+id/check17"
+        <RadioButton
+            android:id="@+id/radio17"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="26" />
+            android:text="26"
+            android:textSize="18sp" />
 
-        <CheckBox
-            android:id="@+id/check18"
+        <RadioButton
+            android:id="@+id/radio18"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="잘 모르겠다" />
-    </LinearLayout>
+            android:text="잘 모르겠다"
+            android:textSize="18sp" />
+    </RadioGroup>
 
     <Button
         android:id="@+id/next3"
