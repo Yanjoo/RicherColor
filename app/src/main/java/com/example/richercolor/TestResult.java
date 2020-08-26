@@ -18,11 +18,10 @@ public class TestResult extends AppCompatActivity {
         text6 = (TextView)findViewById(R.id.textView6);
 
         Intent intent = getIntent();
+        Data data = Data.getData();
 
-        String data1 = intent.getStringExtra("data1");
+        String data1 = data.getData(0);
         String data2 = intent.getStringExtra("data2");
 
-        text6.setText("data1:"+data1+"\n");
-        text6.append("data2:"+data2+"\n");
     }
 }
