@@ -21,6 +21,7 @@
         <activity android:name=".Colortest1" />
         <activity android:name=".Photo" />
         <activity android:name=".Album" />
+        <activity android:name=".Famous" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
