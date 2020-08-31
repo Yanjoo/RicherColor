@@ -20,11 +20,18 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.DataSource;
+import com.bumptech.glide.load.engine.GlideException;
+import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.target.Target;
 import com.skydoves.balloon.ArrowConstraints;
 import com.skydoves.balloon.ArrowOrientation;
 import com.skydoves.balloon.Balloon;
 import com.skydoves.balloon.BalloonAnimation;
 import com.skydoves.balloon.OnBalloonClickListener;
+
+import java.io.File;
 
 public class Album extends AppCompatActivity {
 
@@ -38,6 +45,7 @@ public class Album extends AppCompatActivity {
         setContentView(R.layout.activity_album);
 
         imageView = findViewById(R.id.imageView);
+
         getImage();
 
         // 이미지뷰 터치했을때
@@ -47,6 +55,8 @@ public class Album extends AppCompatActivity {
                 if (event.getAction() == MotionEvent.ACTION_DOWN) {
                     touchX = event.getX();  // 좌표를 받아온다
                     touchY = event.getY();
+
+                    if (touchX >= albumImage.getWidth() || touchY >= albumImage.getHeight()) return false;
 
                     // 좌표에 RGB 값을 추출한다.
                     int rgb = albumImage.getPixel((int)touchX, (int)touchY);
@@ -67,7 +77,7 @@ public class Album extends AppCompatActivity {
                             .setBackgroundColor(Color.rgb(100, 228, 44))
                             .setBalloonAnimation(BalloonAnimation.FADE)
                             .build();
-                    ballon.show(v, (int)touchX, (int)touchY);
+                    ballon.show(v, (int)touchX, (0 - (int)touchY));
                 }
 
                 return false;
@@ -87,6 +97,8 @@ public class Album extends AppCompatActivity {
 
         try {
             if (resultCode == RESULT_OK) {
+                Log.d("Album ", "결과 받아옴");
+
                 // 선택한 이미지를 지칭하는 Uri 객체를 얻어옴
                 Uri uri = data.getData();
                 // Uri 객체를 통해서 컨텐츠 프로바이덜르 통해 이미지 정보를 가져온다.
@@ -94,12 +106,19 @@ public class Album extends AppCompatActivity {
                 Cursor cursor = resolver.query(uri, null, null, null, null);
                 cursor.moveToNext();
 
+                String path = cursor.getString(cursor.getColumnIndex(MediaStore.MediaColumns.DATA));
+                Uri newUri = Uri.fromFile(new File(path));
+                Log.d("Album ", " newUri " + newUri.getPath());
+
                 // 사용자가 선택한 이미지 경로를 가져옴
                 int index = cursor.getColumnIndex(MediaStore.Images.Media.DATA);
                 String source = cursor.getString(index);
+                Log.d("Album ", " source " + source);
 
                 // 이미지 객체 생성
                 Bitmap bitmap = BitmapFactory.decodeFile(source);
+                Log.d("Album ", " bitmap " + bitmap);
+
 
                 // 이미지 크기 조정
                 Bitmap bitmap2 = resizeBitmap(1024, bitmap);

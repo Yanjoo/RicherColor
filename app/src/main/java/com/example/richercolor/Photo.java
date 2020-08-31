@@ -57,10 +57,12 @@ public class Photo extends AppCompatActivity {
         File file = new File(pic_path);
 
         if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.M){
-            contentUri= FileProvider.getUriForFile(this,"kr.co.richercolor.file_provider",file);
+            contentUri= FileProvider.getUriForFile(this,"kr.co.richercolor.file_provider", file);
         }else{
             contentUri=Uri.fromFile(file);
         }
+
+        Log.d("Photo ", contentUri.toString());
 
         intent.putExtra(MediaStore.EXTRA_OUTPUT, contentUri);
         startActivityForResult(intent,1);
