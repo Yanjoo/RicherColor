@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".rgbtest">
+
+    <ImageView
+        android:id="@+id/imgtest"
+        android:layout_width="match_parent"
+        android:layout_height="323dp"
+        app:srcCompat="@drawable/cow" />
+
+    <SeekBar
+        android:id="@+id/seekBarred"
+        android:layout_width="match_parent"
+        android:layout_height="37dp"
+        android:max="255"/>
+
+    <SeekBar
+        android:id="@+id/seekBargreen"
+        android:layout_width="match_parent"
+        android:layout_height="37dp"
+        android:max="255"/>
+
+    <SeekBar
+        android:id="@+id/seekBarblue"
+        android:layout_width="match_parent"
+        android:layout_height="38dp"
+        android:max="255"/>
+</LinearLayout>
