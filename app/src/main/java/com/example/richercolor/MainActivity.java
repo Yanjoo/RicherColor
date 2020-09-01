@@ -49,6 +49,13 @@ public class MainActivity extends AppCompatActivity {
                 getPhoto();
             }
         });
+
+        viewArtBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getFamous();
+            }
+        });
     }
 
     private void takePhoto() {
@@ -58,6 +65,11 @@ public class MainActivity extends AppCompatActivity {
 
     private void getPhoto() {
         Intent intent = new Intent(this, Album.class);
+        startActivity(intent);
+    }
+
+    private void getFamous() {
+        Intent intent = new Intent(this, Famous.class);
         startActivity(intent);
     }
 }
