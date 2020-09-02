@@ -58,5 +58,11 @@
             android:layout_height="wrap_content"
             android:text="명화 감상" />
 
+        <Button
+            android:id="@+id/test_photo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="사진 테스트" />
+
     </LinearLayout>
 </LinearLayout>
